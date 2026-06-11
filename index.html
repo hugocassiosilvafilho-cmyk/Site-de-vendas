@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Social - Impulsione Suas Redes Sociais</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variáveis de Cores (Premium Dark Theme) */
+        :root {
+            --bg-color: #0b0914;
+            --card-bg: rgba(25, 18, 43, 0.6);
+            --primary-purple: #7000ff;
+            --electric-purple: #a200ff;
+            --neon-cyan: #00f3ff;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b5;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --wpp-green: #25D366;
+            --wpp-green-hover: #1ebe57;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at top right, rgba(162, 0, 255, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(0, 243, 255, 0.1), transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .brand:hover img {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.7);
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        /* Header Hero */
+        header {
+            text-align: center;
+            padding: 40px 20px 80px;
+            position: relative;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 20%, var(--neon-cyan) 60%, var(--electric-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(162, 0, 255, 0.2);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Glow effect in background */
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--electric-purple);
+            border-radius: 50%;
+            filter: blur(180px);
+            opacity: 0.35;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        /* Tabs / Filtros */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, rgba(162, 0, 255, 0.2), rgba(0, 243, 255, 0.15));
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Grid de Preços */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            padding-bottom: 80px;
+        }
+
+        /* Cards */
+        .pricing-card {
+            background: linear-gradient(180deg, rgba(25, 18, 43, 0.8) 0%, rgba(11, 9, 20, 0.9) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 30px;
+            position: relative;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-card.hidden {
+            display: none;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-purple), var(--neon-cyan));
+            opacity: 0.8;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(162, 0, 255, 0.15);
+            border-color: rgba(0, 243, 255, 0.4);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--electric-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .card-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* Lista de Preços */
+        .price-list {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .price-list li:last-child {
+            border-bottom: none;
+        }
+
+        .price-list li:hover .qty {
+            color: #fff;
+        }
+
+        .qty {
+            color: var(--text-muted);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty i {
+            color: var(--primary-purple);
+            font-size: 0.8rem;
+        }
+
+        .val {
+            font-weight: 800;
+            color: var(--neon-cyan);
+            letter-spacing: 0.5px;
+        }
+
+        /* Botão de Compra */
+        .btn-buy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--electric-purple), var(--primary-purple));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(162, 0, 255, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-buy::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .btn-buy:hover::after {
+            opacity: 1;
+            left: 100%;
+        }
+
+        .btn-buy:hover {
+            background: linear-gradient(135deg, var(--primary-purple), var(--electric-purple));
+            box-shadow: 0 15px 35px rgba(162, 0, 255, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        /* Seção Outras Plataformas */
+        .other-platforms {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, transparent, rgba(0, 243, 255, 0.05) 50%, transparent);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            margin: 40px 0 80px;
+            position: relative;
+        }
+
+        .other-platforms::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            background: var(--neon-cyan);
+            filter: blur(250px);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .other-platforms h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--wpp-green), #128C7E);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(135deg, var(--wpp-green-hover), #075E54);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .btn-whatsapp i {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsividade (Mobile-First approach base) */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .tabs-container {
+                flex-wrap: wrap;
+            }
+            .tab-btn {
+                flex: 1 1 calc(33.333% - 10px);
+                justify-content: center;
+                padding: 12px 10px;
+                font-size: 0.95rem;
+            }
+            .pricing-card {
+                padding: 30px 20px;
+            }
+            .other-platforms h2 {
+                font-size: 1.8rem;
+            }
+            .btn-whatsapp {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 20px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-btn {
+                flex: 1 1 100%;
+            }
+            header {
+                padding: 50px 20px 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .pricing-card {
+                padding: 24px 16px;
+            }
+            .price-list li {
+                font-size: 0.95rem;
+                padding: 12px 0;
+            }
+            .card-header h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar & Header Hero -->
+    <header>
+        <div class="glow-circle"></div>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="brand">
+                    <img src="logo.png" alt="Turbo Social Logo">
+                    <span class="brand-name">Turbo Social</span>
+                </a>
+            </nav>
+            <div class="hero-content floating">
+                <h1>Engajamento de<br>Alta Qualidade</h1>
+                <p>Escale seus resultados, aumente sua autoridade e viralize seus conteúdos de forma segura e imediata nas principais redes sociais.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros de Plataforma -->
+    <div class="container">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-platform="all">
+                <i class="fa-solid fa-th-large"></i> Todas
+            </button>
+            <button class="tab-btn" data-platform="Instagram">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </button>
+            <button class="tab-btn" data-platform="TikTok">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+            </button>
+            <button class="tab-btn" data-platform="Facebook">
+                <i class="fa-brands fa-facebook-f"></i> Facebook
+            </button>
+        </div>
+    </div>
+
+    <!-- Grid de Planos -->
+    <main class="container">
+        <div class="pricing-grid">
+            
+            <!-- Card 1: Visualizações -->
+            <div class="pricing-card" data-platform="Instagram TikTok Facebook">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3 id="card1-title">Visualizações em Reels</h3>
+                </div>
+                <ul class="price-list">
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 1.000 visualizações</span> <span class="val">R$ 2,36</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 5.000 visualizações</span> <span class="val">R$ 11,80</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 10.000 visualizações</span> <span class="val">R$ 23,60</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 20.000 visualizações</span> <span class="val">R$ 47,20</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 50.000 visualizações</span> <span class="val">R$ 118,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 100.000 visualizações</span> <span class="val">R$ 236,00</span></li>
+                </ul>
+                <a href="#" id="btn-card1" class="btn-buy" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Comprar Agora
+                </a>
+            </div>
+
+            <!-- Card 2: Curtidas -->
+            <div class="pricing-card" data-platform="Instagram TikTok Facebook">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3 id="card2-title">Curtidas de Alta Qualidade</h3>
+                </div>
+                <ul class="price-list">
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 1.000 curtidas</span> <span class="val">R$ 7,96</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 5.000 curtidas</span> <span class="val">R$ 39,80</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 10.000 curtidas</span> <span class="val">R$ 79,60</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 20.000 curtidas</span> <span class="val">R$ 159,20</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 50.000 curtidas</span> <span class="val">R$ 398,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 100.000 curtidas</span> <span class="val">R$ 796,00</span></li>
+                </ul>
+                <a href="#" id="btn-card2" class="btn-buy" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Comprar Agora
+                </a>
+            </div>
+
+            <!-- Card 3: Seguidores -->
+            <div class="pricing-card" data-platform="Instagram TikTok Facebook">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3 id="card3-title">Seguidores de Alta Qualidade</h3>
+                </div>
+                <ul class="price-list">
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 1.000 seguidores</span> <span class="val">R$ 28,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 5.000 seguidores</span> <span class="val">R$ 140,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 10.000 seguidores</span> <span class="val">R$ 280,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 20.000 seguidores</span> <span class="val">R$ 560,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 50.000 seguidores</span> <span class="val">R$ 1.400,00</span></li>
+                    <li><span class="qty"><i class="fa-solid fa-check"></i> 100.000 seguidores</span> <span class="val">R$ 2.800,00</span></li>
+                </ul>
+                <a href="#" id="btn-card3" class="btn-buy" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Comprar Agora
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Outras Plataformas -->
+    <section class="other-platforms">
+        <div class="container">
+            <h2>Deseja serviços para outra plataforma? Consulte outros serviços disponíveis</h2>
+            <a href="https://wa.me/5511977418328?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20servi%C3%A7os%20para%20outras%20plataformas." class="btn-whatsapp" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Falar com o Atendimento
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Turbo Social. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Lógica de Abas, Filtro e Links Dinâmicos -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const wppNumber = "5511977418328";
+
+            const tabs = document.querySelectorAll(".tab-btn");
+            const cards = document.querySelectorAll(".pricing-card");
+            const card1Title = document.getElementById("card1-title");
+
+            const btn1 = document.getElementById("btn-card1");
+            const btn2 = document.getElementById("btn-card2");
+            const btn3 = document.getElementById("btn-card3");
+
+            const getViewText = (platform) => {
+                if (platform === "all") return "Visualizações em Reels";
+                if (platform === "Instagram") return "Visualizações em Reels";
+                if (platform === "TikTok") return "Visualizações no TikTok";
+                if (platform === "Facebook") return "Visualizações no Facebook";
+                return "Visualizações";
+            };
+
+            const filterCards = (platform) => {
+                cards.forEach(card => {
+                    const platformsAttr = card.getAttribute("data-platform");
+                    if (platform === "all" || platformsAttr.includes(platform)) {
+                        card.classList.remove("hidden");
+                    } else {
+                        card.classList.add("hidden");
+                    }
+                });
+            };
+
+            const updateContent = (platform) => {
+                const viewText = getViewText(platform);
+
+                card1Title.textContent = viewText;
+
+                filterCards(platform);
+
+                const platName = platform === "all" ? "Instagram" : platform;
+
+                btn1.href = `https://wa.me/${wppNumber}?text=${encodeURIComponent(`Olá! Gostaria de comprar o pacote de ${viewText}.`)}`;
+                btn2.href = `https://wa.me/${wppNumber}?text=${encodeURIComponent(`Olá! Gostaria de comprar o pacote de Curtidas de Alta Qualidade para ${platName}.`)}`;
+                btn3.href = `https://wa.me/${wppNumber}?text=${encodeURIComponent(`Olá! Gostaria de comprar o pacote de Seguidores de Alta Qualidade para ${platName}.`)}`;
+            };
+
+            // Iniciar com "Todas" (default)
+            updateContent("all");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+                    const platform = tab.getAttribute("data-platform");
+                    updateContent(platform);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
