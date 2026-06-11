@@ -1141,8 +1141,8 @@
 
                 if (option.value === 'custom') {
                     inputWrapper.classList.add('show');
-                    var customVal = parseInt(numInput.value) || 100000;
-                    if (customVal < 100000) customVal = 100000;
+                    var customVal = parseInt(numInput.value) || 1000;
+                    if (customVal < 1000) customVal = 1000;
                     
                     var multiplier = 0;
                     if (cardId === 'card1') multiplier = 0.00236;
