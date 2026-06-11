@@ -14,11 +14,13 @@
     <style>
         /* Variáveis de Cores (Premium Dark Theme) */
         :root {
-            --bg-color: #0b0914;
+            --bg-color: #050816;
             --card-bg: rgba(25, 18, 43, 0.6);
-            --primary-purple: #7000ff;
+            --primary-purple: #8A2BE2;
             --electric-purple: #a200ff;
-            --neon-cyan: #00f3ff;
+            --magenta: #D946EF;
+            --neon-cyan: #00F5FF;
+            --electric-blue: #00BFFF;
             --text-main: #ffffff;
             --text-muted: #a0a0b5;
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -91,32 +93,11 @@
         }
 
         /* Header Hero */
-        header {
-            text-align: center;
-            padding: 40px 20px 80px;
-            position: relative;
-            animation: fadeIn 1.2s ease-in-out;
-        }
+        
 
-        header h1 {
-            font-size: 4.2rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 20%, var(--neon-cyan) 60%, var(--electric-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            text-shadow: 0 10px 30px rgba(162, 0, 255, 0.2);
-        }
+        
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-        }
+        
 
         /* Animations */
         @keyframes fadeIn {
@@ -129,30 +110,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
+        
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
+        
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
         /* Glow effect in background */
-        .glow-circle {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: var(--electric-purple);
-            border-radius: 50%;
-            filter: blur(180px);
-            opacity: 0.35;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: -1;
-        }
+        
 
         /* Grid de Preços */
         .pricing-grid {
@@ -197,10 +163,7 @@
             border-color: rgba(0, 243, 255, 0.4);
         }
 
-        .card-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
+        .card-
 
         .card-icon {
             font-size: 3rem;
@@ -592,15 +555,9 @@
 
         /* Responsividade (Mobile-First approach base) */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2rem;
-            }
-            header p {
-                font-size: 1rem;
-            }
-            header {
-                padding: 30px 20px 50px;
-            }
+            
+            
+            
             .tab-btn {
                 flex: 1 1 calc(33.333% - 10px);
                 justify-content: center;
@@ -640,9 +597,7 @@
                 flex: 1 1 100%;
                 font-size: 0.9rem;
             }
-            header {
-                padding: 20px 16px 40px;
-            }
+            
             .pricing-grid {
                 gap: 16px;
                 padding-bottom: 50px;
@@ -887,12 +842,7 @@
             right: 20px;
             line-height: 1;
         }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+        .testimonial-
         .testimonial-avatar {
             width: 50px;
             height: 50px;
@@ -928,24 +878,193 @@
             font-size: 2rem;
         }
 
+
+        /* CYBERPUNK HERO STYLES */
+        .cyber-
+
+        .relative-z {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cyber-glow-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(0,245,255,0.15) 0%, rgba(138,43,226,0.1) 40%, transparent 70%);
+            filter: blur(80px);
+            z-index: 1;
+            animation: pulse-bg 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        .energy-rays {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 45%, rgba(0, 245, 255, 0.03) 50%, transparent 55%),
+                linear-gradient(90deg, transparent 25%, rgba(217, 70, 239, 0.02) 30%, transparent 35%);
+            z-index: 1;
+            transform-origin: center top;
+            animation: rays-rotate 20s linear infinite;
+        }
+
+        @keyframes rays-rotate {
+            0% { transform: scale(2) rotate(0deg); }
+            100% { transform: scale(2) rotate(360deg); }
+        }
+
+        /* Hero Element Cyberpunk Float */
+        .cyberpunk-hero {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+            z-index: 20;
+            animation: cyber-float 8s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-glow-pulse {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 120%; height: 140%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse at center, rgba(0, 191, 255, 0.25) 0%, rgba(217, 70, 239, 0.15) 40%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+            animation: hero-glow 8s ease-in-out infinite;
+        }
+
+        @keyframes hero-glow {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes cyber-float {
+            0%, 100% {
+                transform: translateY(0) scale(1) rotate(-3deg);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05) rotate(3deg);
+            }
+        }
+
+        .cyberpunk-hero h1 {
+            font-size: 4.8rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 10%, var(--neon-cyan) 50%, var(--magenta) 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            text-shadow: 0 0 40px rgba(0, 245, 255, 0.3);
+        }
+
+        .cyberpunk-hero p {
+            color: var(--text-muted);
+            font-size: 1.35rem;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Partículas Orbitantes */
+        .cyber-particles {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 10px 2px #fff;
+            opacity: 0;
+            animation: orbit-particle linear infinite;
+        }
+
+        .p1 { width: 4px; height: 4px; top: 20%; left: 20%; background: var(--neon-cyan); box-shadow: 0 0 15px 3px var(--neon-cyan); animation-duration: 12s; animation-delay: 0s; }
+        .p2 { width: 6px; height: 6px; top: 70%; left: 80%; background: var(--magenta); box-shadow: 0 0 20px 4px var(--magenta); animation-duration: 18s; animation-delay: -3s; }
+        .p3 { width: 3px; height: 3px; top: 80%; left: 30%; background: var(--electric-blue); box-shadow: 0 0 12px 2px var(--electric-blue); animation-duration: 15s; animation-delay: -7s; }
+        .p4 { width: 5px; height: 5px; top: 30%; left: 70%; background: var(--primary-purple); box-shadow: 0 0 18px 4px var(--primary-purple); animation-duration: 20s; animation-delay: -10s; }
+        .p5 { width: 4px; height: 4px; top: 50%; left: 10%; background: var(--neon-cyan); box-shadow: 0 0 15px 3px var(--neon-cyan); animation-duration: 14s; animation-delay: -5s; }
+        .p6 { width: 5px; height: 5px; top: 60%; left: 90%; background: var(--magenta); box-shadow: 0 0 18px 4px var(--magenta); animation-duration: 16s; animation-delay: -1s; }
+        .p7 { width: 7px; height: 7px; top: 10%; left: 60%; background: var(--electric-blue); box-shadow: 0 0 25px 5px var(--electric-blue); animation-duration: 22s; animation-delay: -12s; }
+        .p8 { width: 3px; height: 3px; top: 90%; left: 50%; background: #fff; box-shadow: 0 0 10px 2px #fff; animation-duration: 11s; animation-delay: -8s; }
+
+        @keyframes orbit-particle {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; transform: translate(30px, -30px) scale(1.2); }
+            50% { opacity: 1; transform: translate(60px, -10px) scale(1); }
+            80% { opacity: 0.8; transform: translate(20px, 40px) scale(1.2); }
+            100% { transform: translate(-20px, 10px) scale(0.5); opacity: 0; }
+        }
+
+        /* Responsivo Cyberpunk */
+        @media (max-width: 768px) {
+            .cyberpunk-hero h1 { font-size: 3rem; }
+            .cyberpunk-hero p { font-size: 1.1rem; }
+            .cyber-
+            @keyframes cyber-float {
+                0%, 100% { transform: translateY(0) scale(1) rotate(-2deg); }
+                50% { transform: translateY(-10px) scale(1.02) rotate(2deg); }
+            }
+        }
+        @media (max-width: 480px) {
+            .cyberpunk-hero h1 { font-size: 2.3rem; }
+            .cyberpunk-hero p { font-size: 1rem; }
+        }
     </style>
 
 </head>
 <body>
 
     <!-- Navbar & Header Hero -->
-    <header>
-        <div class="glow-circle"></div>
-        <div class="container">
+    <header class="cyber-header">
+        <div class="cyber-glow-bg"></div>
+        <div class="cyber-particles">
+            <div class="particle p1"></div>
+            <div class="particle p2"></div>
+            <div class="particle p3"></div>
+            <div class="particle p4"></div>
+            <div class="particle p5"></div>
+            <div class="particle p6"></div>
+            <div class="particle p7"></div>
+            <div class="particle p8"></div>
+        </div>
+        <div class="energy-rays"></div>
+
+        <div class="container relative-z">
             <nav class="navbar">
                 <a href="#" class="brand">
                     <img src="logo.png" alt="Turbo Social Logo">
                     <span class="brand-name">Turbo Social</span>
                 </a>
             </nav>
-            <div class="hero-content floating">
-                <h1>Engajamento de<br>Alta Qualidade</h1>
-                <p>Escale seus resultados, aumente sua autoridade e viralize seus conteúdos de forma segura e imediata nas principais redes sociais.</p>
+            <div class="hero-content cyberpunk-hero">
+                <div class="hero-glow-pulse"></div>
+                <div class="hero-inner">
+                    <h1>Engajamento de<br>Alta Qualidade</h1>
+                    <p>Escale seus resultados, aumente sua autoridade e viralize seus conteúdos de forma segura e imediata nas principais redes sociais.</p>
+                </div>
             </div>
         </div>
     </header>
