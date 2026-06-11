@@ -14,13 +14,11 @@
     <style>
         /* Variáveis de Cores (Premium Dark Theme) */
         :root {
-            --bg-color: #050816;
+            --bg-color: #0b0914;
             --card-bg: rgba(25, 18, 43, 0.6);
-            --primary-purple: #8A2BE2;
+            --primary-purple: #7000ff;
             --electric-purple: #a200ff;
-            --magenta: #D946EF;
-            --neon-cyan: #00F5FF;
-            --electric-blue: #00BFFF;
+            --neon-cyan: #00f3ff;
             --text-main: #ffffff;
             --text-muted: #a0a0b5;
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -93,11 +91,32 @@
         }
 
         /* Header Hero */
-        
+        header {
+            text-align: center;
+            padding: 40px 20px 80px;
+            position: relative;
+            animation: fadeIn 1.2s ease-in-out;
+        }
 
-        
+        header h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 20%, var(--neon-cyan) 60%, var(--electric-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(162, 0, 255, 0.2);
+        }
 
-        
+        header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -110,15 +129,66 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
 
-        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
         /* Glow effect in background */
-        
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--electric-purple);
+            border-radius: 50%;
+            filter: blur(180px);
+            opacity: 0.35;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        /* Tabs / Filtros */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, rgba(162, 0, 255, 0.2), rgba(0, 243, 255, 0.15));
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            transform: translateY(-2px);
+        }
 
         /* Grid de Preços */
         .pricing-grid {
@@ -163,7 +233,10 @@
             border-color: rgba(0, 243, 255, 0.4);
         }
 
-        .card-
+        .card-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
 
         .card-icon {
             font-size: 3rem;
@@ -300,6 +373,33 @@
             font-weight: 800;
             color: var(--neon-cyan);
             letter-spacing: 1px;
+        }
+
+        .micro-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .micro-benefits span {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .micro-benefits .check-icon {
+            color: var(--neon-cyan);
+            font-weight: 800;
+            font-size: 0.95rem;
+            width: 16px;
+            text-align: center;
+            flex-shrink: 0;
         }
 
         .faq-section {
@@ -555,9 +655,15 @@
 
         /* Responsividade (Mobile-First approach base) */
         @media (max-width: 768px) {
-            
-            
-            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            header {
+                padding: 30px 20px 50px;
+            }
             .tab-btn {
                 flex: 1 1 calc(33.333% - 10px);
                 justify-content: center;
@@ -597,7 +703,9 @@
                 flex: 1 1 100%;
                 font-size: 0.9rem;
             }
-            
+            header {
+                padding: 20px 16px 40px;
+            }
             .pricing-grid {
                 gap: 16px;
                 padding-bottom: 50px;
@@ -742,335 +850,41 @@
             color: rgba(255, 255, 255, 0.4);
             font-weight: 400;
         }
-
-        /* Benefícios Globais */
-        .global-benefits {
-            background: rgba(0, 243, 255, 0.05);
-            border: 1px solid rgba(0, 243, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .global-benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-        .global-benefit-item i {
-            color: var(--neon-cyan);
-            font-size: 1.2rem;
-        }
-
-        /* Como Funciona e Prova Social */
-        .how-it-works, .social-proof {
-            padding: 80px 20px;
-        }
-        .social-proof {
-            background: linear-gradient(180deg, transparent, rgba(162, 0, 255, 0.05), transparent);
-        }
-        .how-it-works h2, .social-proof h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, #fff, var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .steps-container, .testimonials-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .step-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 30px;
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .step-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(162, 0, 255, 0.3);
-        }
-        .step-icon {
-            font-size: 3rem;
-            color: var(--neon-cyan);
-            margin-bottom: 20px;
-        }
-        .step-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .step-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .testimonial-card {
-            background: rgba(25, 18, 43, 0.6);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 30px;
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-            position: relative;
-        }
-        .testimonial-card::before {
-            content: '\201C';
-            font-family: serif;
-            font-size: 6rem;
-            color: rgba(162, 0, 255, 0.1);
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            line-height: 1;
-        }
-        .testimonial-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--electric-purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #fff;
-        }
-        .testimonial-name {
-            font-weight: 800;
-            color: #fff;
-            font-size: 1.1rem;
-        }
-        .testimonial-stars {
-            color: #FFD700;
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-        .testimonial-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-            font-style: italic;
-        }
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 16px;
-            font-size: 2rem;
-        }
-
-
-        /* CYBERPUNK HERO STYLES */
-        .cyber-
-
-        .relative-z {
-            position: relative;
-            z-index: 10;
-        }
-
-        .cyber-glow-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px;
-            height: 800px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(0,245,255,0.15) 0%, rgba(138,43,226,0.1) 40%, transparent 70%);
-            filter: blur(80px);
-            z-index: 1;
-            animation: pulse-bg 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse-bg {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-        }
-
-        .energy-rays {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                linear-gradient(90deg, transparent 45%, rgba(0, 245, 255, 0.03) 50%, transparent 55%),
-                linear-gradient(90deg, transparent 25%, rgba(217, 70, 239, 0.02) 30%, transparent 35%);
-            z-index: 1;
-            transform-origin: center top;
-            animation: rays-rotate 20s linear infinite;
-        }
-
-        @keyframes rays-rotate {
-            0% { transform: scale(2) rotate(0deg); }
-            100% { transform: scale(2) rotate(360deg); }
-        }
-
-        /* Hero Element Cyberpunk Float */
-        .cyberpunk-hero {
-            position: relative;
-            display: inline-block;
-            margin: 0 auto;
-            z-index: 20;
-            animation: cyber-float 8s ease-in-out infinite;
-            will-change: transform;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-glow-pulse {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 120%; height: 140%;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(ellipse at center, rgba(0, 191, 255, 0.25) 0%, rgba(217, 70, 239, 0.15) 40%, transparent 70%);
-            filter: blur(40px);
-            z-index: 1;
-            animation: hero-glow 8s ease-in-out infinite;
-        }
-
-        @keyframes hero-glow {
-            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        @keyframes cyber-float {
-            0%, 100% {
-                transform: translateY(0) scale(1) rotate(-3deg);
-            }
-            50% {
-                transform: translateY(-20px) scale(1.05) rotate(3deg);
-            }
-        }
-
-        .cyberpunk-hero h1 {
-            font-size: 4.8rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 10%, var(--neon-cyan) 50%, var(--magenta) 90%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            text-shadow: 0 0 40px rgba(0, 245, 255, 0.3);
-        }
-
-        .cyberpunk-hero p {
-            color: var(--text-muted);
-            font-size: 1.35rem;
-            max-width: 750px;
-            margin: 0 auto;
-            line-height: 1.6;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        /* Partículas Orbitantes */
-        .cyber-particles {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 100%; height: 100%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 10px 2px #fff;
-            opacity: 0;
-            animation: orbit-particle linear infinite;
-        }
-
-        .p1 { width: 4px; height: 4px; top: 20%; left: 20%; background: var(--neon-cyan); box-shadow: 0 0 15px 3px var(--neon-cyan); animation-duration: 12s; animation-delay: 0s; }
-        .p2 { width: 6px; height: 6px; top: 70%; left: 80%; background: var(--magenta); box-shadow: 0 0 20px 4px var(--magenta); animation-duration: 18s; animation-delay: -3s; }
-        .p3 { width: 3px; height: 3px; top: 80%; left: 30%; background: var(--electric-blue); box-shadow: 0 0 12px 2px var(--electric-blue); animation-duration: 15s; animation-delay: -7s; }
-        .p4 { width: 5px; height: 5px; top: 30%; left: 70%; background: var(--primary-purple); box-shadow: 0 0 18px 4px var(--primary-purple); animation-duration: 20s; animation-delay: -10s; }
-        .p5 { width: 4px; height: 4px; top: 50%; left: 10%; background: var(--neon-cyan); box-shadow: 0 0 15px 3px var(--neon-cyan); animation-duration: 14s; animation-delay: -5s; }
-        .p6 { width: 5px; height: 5px; top: 60%; left: 90%; background: var(--magenta); box-shadow: 0 0 18px 4px var(--magenta); animation-duration: 16s; animation-delay: -1s; }
-        .p7 { width: 7px; height: 7px; top: 10%; left: 60%; background: var(--electric-blue); box-shadow: 0 0 25px 5px var(--electric-blue); animation-duration: 22s; animation-delay: -12s; }
-        .p8 { width: 3px; height: 3px; top: 90%; left: 50%; background: #fff; box-shadow: 0 0 10px 2px #fff; animation-duration: 11s; animation-delay: -8s; }
-
-        @keyframes orbit-particle {
-            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-            20% { opacity: 0.8; transform: translate(30px, -30px) scale(1.2); }
-            50% { opacity: 1; transform: translate(60px, -10px) scale(1); }
-            80% { opacity: 0.8; transform: translate(20px, 40px) scale(1.2); }
-            100% { transform: translate(-20px, 10px) scale(0.5); opacity: 0; }
-        }
-
-        /* Responsivo Cyberpunk */
-        @media (max-width: 768px) {
-            .cyberpunk-hero h1 { font-size: 3rem; }
-            .cyberpunk-hero p { font-size: 1.1rem; }
-            .cyber-
-            @keyframes cyber-float {
-                0%, 100% { transform: translateY(0) scale(1) rotate(-2deg); }
-                50% { transform: translateY(-10px) scale(1.02) rotate(2deg); }
-            }
-        }
-        @media (max-width: 480px) {
-            .cyberpunk-hero h1 { font-size: 2.3rem; }
-            .cyberpunk-hero p { font-size: 1rem; }
-        }
     </style>
-
 </head>
 <body>
 
     <!-- Navbar & Header Hero -->
-    <header class="cyber-header">
-        <div class="cyber-glow-bg"></div>
-        <div class="cyber-particles">
-            <div class="particle p1"></div>
-            <div class="particle p2"></div>
-            <div class="particle p3"></div>
-            <div class="particle p4"></div>
-            <div class="particle p5"></div>
-            <div class="particle p6"></div>
-            <div class="particle p7"></div>
-            <div class="particle p8"></div>
-        </div>
-        <div class="energy-rays"></div>
-
-        <div class="container relative-z">
+    <header>
+        <div class="glow-circle"></div>
+        <div class="container">
             <nav class="navbar">
                 <a href="#" class="brand">
                     <img src="logo.png" alt="Turbo Social Logo">
                     <span class="brand-name">Turbo Social</span>
                 </a>
             </nav>
-            <div class="hero-content cyberpunk-hero">
-                <div class="hero-glow-pulse"></div>
-                <div class="hero-inner">
-                    <h1>Engajamento de<br>Alta Qualidade</h1>
-                    <p>Escale seus resultados, aumente sua autoridade e viralize seus conteúdos de forma segura e imediata nas principais redes sociais.</p>
-                </div>
+            <div class="hero-content floating">
+                <h1>Engajamento de<br>Alta Qualidade</h1>
+                <p>Escale seus resultados, aumente sua autoridade e viralize seus conteúdos de forma segura e imediata nas principais redes sociais.</p>
             </div>
         </div>
     </header>
 
     <!-- Filtros de Plataforma -->
-    <div class="container" style="text-align: center; margin-bottom: 20px;"><p style="color: var(--neon-cyan); font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase;">⚡ Válido para Instagram, TikTok e Facebook</p></div>
+    <div class="container">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-platform="Instagram">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </button>
+            <button class="tab-btn" data-platform="TikTok">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+            </button>
+            <button class="tab-btn" data-platform="Facebook">
+                <i class="fa-brands fa-facebook-f"></i> Facebook
+            </button>
+        </div>
+    </div>
 
     <!-- Grid de Planos -->
     <main class="container">
@@ -1100,7 +914,11 @@
                     <span class="price-label">Preço:</span>
                     <span class="price-value" id="price-card1">R$ 23,60</span>
                 </div>
-                
+                <div class="micro-benefits">
+                    <span><span class="check-icon">&#10003;</span> Entrega Automática</span>
+                    <span><span class="check-icon">&#10003;</span> Sem precisar de senha</span>
+                    <span><span class="check-icon">&#10003;</span> Alta durabilidade</span>
+                </div>
                 <a href="https://wa.me/5511977418328?text=Ol%C3%A1!%20Quero%20conhecer%20os%20pacotes%20de%20engajamento." id="btn-card1" class="btn-buy">
                     <i class="fa-brands fa-whatsapp"></i> Comprar Agora
                 </a>
@@ -1130,7 +948,11 @@
                     <span class="price-label">Preço:</span>
                     <span class="price-value" id="price-card2">R$ 79,60</span>
                 </div>
-                
+                <div class="micro-benefits">
+                    <span><span class="check-icon">&#10003;</span> Entrega Automática</span>
+                    <span><span class="check-icon">&#10003;</span> Sem precisar de senha</span>
+                    <span><span class="check-icon">&#10003;</span> Alta durabilidade</span>
+                </div>
                 <a href="https://wa.me/5511977418328?text=Ol%C3%A1!%20Quero%20conhecer%20os%20pacotes%20de%20engajamento." id="btn-card2" class="btn-buy">
                     <i class="fa-brands fa-whatsapp"></i> Comprar Agora
                 </a>
@@ -1160,85 +982,18 @@
                     <span class="price-label">Preço:</span>
                     <span class="price-value" id="price-card3">R$ 280,00</span>
                 </div>
-                
+                <div class="micro-benefits">
+                    <span><span class="check-icon">&#10003;</span> Entrega Automática</span>
+                    <span><span class="check-icon">&#10003;</span> Sem precisar de senha</span>
+                    <span><span class="check-icon">&#10003;</span> Alta durabilidade</span>
+                </div>
                 <a href="https://wa.me/5511977418328?text=Ol%C3%A1!%20Quero%20conhecer%20os%20pacotes%20de%20engajamento." id="btn-card3" class="btn-buy">
                     <i class="fa-brands fa-whatsapp"></i> Comprar Agora
                 </a>
             </div>
 
         </div>
-
-        <div class="global-benefits">
-            <div class="global-benefit-item"><i class="fa-solid fa-bolt"></i> Entrega Automática e Rápida</div>
-            <div class="global-benefit-item"><i class="fa-solid fa-shield-halved"></i> Sem Precisar de Senha</div>
-            <div class="global-benefit-item"><i class="fa-solid fa-star"></i> Alta Retenção e Qualidade</div>
-        </div>
     </main>
-
-
-
-    <!-- Como Funciona -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2>Como Funciona?</h2>
-            <div class="steps-container">
-                <div class="step-card">
-                    <i class="fa-solid fa-hand-pointer step-icon"></i>
-                    <h4>1. Escolha o Pacote</h4>
-                    <p>Selecione a quantidade de seguidores, curtidas ou visualizações que deseja.</p>
-                </div>
-                <div class="step-card">
-                    <i class="fa-brands fa-whatsapp step-icon"></i>
-                    <h4>2. Fale Conosco</h4>
-                    <p>Clique em comprar para nos chamar no WhatsApp. Envie apenas o link do seu perfil ou postagem (não pedimos senha).</p>
-                </div>
-                <div class="step-card">
-                    <i class="fa-solid fa-rocket step-icon"></i>
-                    <h4>3. Receba na Hora</h4>
-                    <p>Faça o pagamento seguro e veja os números subirem na sua conta em questão de minutos!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Prova Social -->
-    <section class="social-proof">
-        <div class="container">
-            <h2>O que nossos clientes dizem</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar"><i class="fa-solid fa-user"></i></div>
-                        <div>
-                            <div class="testimonial-name">João Marcos</div>
-                            <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">"Muito rápido! Comprei 10k de seguidores e em menos de uma hora já tinha chegado tudo. Recomendo muito!"</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar"><i class="fa-solid fa-user"></i></div>
-                        <div>
-                            <div class="testimonial-name">Ana Beatriz</div>
-                            <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">"Uso pra dar uma alavancada nos Reels dos meus clientes. A entrega é sempre automática, nunca tive problemas com queda."</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar"><i class="fa-solid fa-user"></i></div>
-                        <div>
-                            <div class="testimonial-name">Carlos Eduardo</div>
-                            <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">"O melhor é que não precisa de senha. Faço o pix, mando o link e o engajamento bomba. Excelente serviço."</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1307,15 +1062,7 @@
                 <a href="#" class="modal-trigger" data-modal="privacy">Políticas de Privacidade</a>
                 <a href="#" class="modal-trigger" data-modal="terms">Termos de Uso</a>
             </div>
-            
-            <div class="payment-methods">
-                <i class="fa-brands fa-pix" style="color: #32BCAD;" title="Pix"></i>
-                <i class="fa-brands fa-cc-mastercard" style="color: #ff5f00;" title="Mastercard"></i>
-                <i class="fa-brands fa-cc-visa" style="color: #1a1f71;" title="Visa"></i>
-                <i class="fa-solid fa-shield-check" style="color: #25D366;" title="Compra Segura"></i>
-            </div>
-            <p>&copy; 2026 Turbo Social. Todos os direitos reservados. Site 100% Seguro.</p>
-
+            <p>&copy; 2026 Turbo Social. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -1348,15 +1095,30 @@
     </div>
 
     <!-- JavaScript Lógica de Abas, Filtro e Links Dinâmicos -->
-        <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             var wppNumber = '5511977418328';
+            var currentPlatform = 'all';
+
+            var tabs = document.querySelectorAll('.tab-btn');
             var cards = document.querySelectorAll('.pricing-card');
+            var card1Title = document.getElementById('card1-title');
+
+            function getPlatformName(platform) {
+                return platform === 'all' ? 'minhas Redes Sociais' : platform;
+            }
+
+            function getViewText(platform) {
+                if (platform === 'all' || platform === 'Instagram') return 'Visualizações em Reels';
+                if (platform === 'TikTok') return 'Visualizações no TikTok';
+                if (platform === 'Facebook') return 'Visualizações no Facebook';
+                return 'Visualizações';
+            }
 
             function getCardBaseName(cardId) {
-                if (cardId === 'card1') return 'Visualizações';
-                if (cardId === 'card2') return 'Curtidas';
-                if (cardId === 'card3') return 'Seguidores';
+                if (cardId === 'card1') return 'Visualizações em Reels';
+                if (cardId === 'card2') return 'Curtidas de Alta Qualidade';
+                if (cardId === 'card3') return 'Seguidores de Alta Qualidade';
                 return '';
             }
 
@@ -1397,20 +1159,50 @@
 
                 priceDisplay.textContent = formatPrice(price);
 
+                var platName = getPlatformName(currentPlatform);
                 var cardName = getCardBaseName(cardId);
-                var message = 'Olá! Gostaria de comprar o pacote de ' + qtyText + ' ' + cardName + '.';
+                var message = 'Olá! Gostaria de comprar o pacote de ' + qtyText + ' ' + cardName + ' para ' + platName + '.';
 
                 btn.href = 'https://wa.me/' + wppNumber + '?text=' + encodeURIComponent(message);
             }
 
-            cards.forEach(function (card) {
-                updateCard(card);
+            function filterCards(platform) {
+                cards.forEach(function (card) {
+                    var platformsAttr = card.getAttribute('data-platform');
+                    if (platform === 'all' || platformsAttr.indexOf(platform) !== -1) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            function updateAll(platform) {
+                currentPlatform = platform;
+                card1Title.textContent = getViewText(platform);
+                filterCards(platform);
+                cards.forEach(function (card) {
+                    if (!card.classList.contains('hidden')) {
+                        updateCard(card);
+                    }
+                });
+            }
+
+            updateAll('Instagram');
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
+                    tab.classList.add('active');
+                    var platform = tab.getAttribute('data-platform');
+                    updateAll(platform);
+                });
             });
 
             document.querySelectorAll('.price-select').forEach(function (select) {
                 select.addEventListener('change', function () {
                     var card = this.closest('.pricing-card');
-                    if (card) {
+                    if (card && !card.classList.contains('hidden')) {
                         updateCard(card);
                     }
                 });
@@ -1419,7 +1211,7 @@
             document.querySelectorAll('.custom-number-input').forEach(function (input) {
                 input.addEventListener('input', function () {
                     var card = this.closest('.pricing-card');
-                    if (card) {
+                    if (card && !card.classList.contains('hidden')) {
                         updateCard(card);
                     }
                 });
