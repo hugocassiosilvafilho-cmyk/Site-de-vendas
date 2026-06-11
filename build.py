@@ -144,6 +144,7 @@ js_new = """    <script>
             });
         });
     </script>"""
+js_new = js_new.replace('\\', '\\\\')
 content = re.sub(r'<script>.*?</script>', js_new, content, flags=re.DOTALL)
 
 # Add Global Benefits under cards
