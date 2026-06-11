@@ -783,6 +783,73 @@
                 padding: 20px 14px;
             }
         }
+
+        /* Botão Flutuante WPP */
+        .floating-wpp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--wpp-green);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .floating-wpp:hover {
+            transform: scale(1.15) rotate(-5deg);
+            background-color: var(--wpp-green-hover);
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .floating-wpp {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 30px;
+            }
+        }
+
+        /* Input Personalizado */
+        .custom-input-wrapper {
+            margin-bottom: 16px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .custom-input-wrapper.show {
+            display: block;
+        }
+        .custom-number-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(162, 0, 255, 0.4);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-weight: 600;
+        }
+        .custom-number-input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .custom-number-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
@@ -837,7 +904,11 @@
                         <option value="3" data-qty-text="20.000" data-price="47.20">20.000 unidades</option>
                         <option value="4" data-qty-text="50.000" data-price="118.00">50.000 unidades</option>
                         <option value="5" data-qty-text="100.000" data-price="236.00">100.000 unidades</option>
+                        <option value="custom">Valor Personalizado</option>
                     </select>
+                </div>
+                <div class="custom-input-wrapper">
+                    <input type="number" class="custom-number-input" min="100000" step="1000" placeholder="Ex: 150000">
                 </div>
                 <div class="card-price-display">
                     <span class="price-label">Preço:</span>
@@ -867,7 +938,11 @@
                         <option value="3" data-qty-text="20.000" data-price="159.20">20.000 unidades</option>
                         <option value="4" data-qty-text="50.000" data-price="398.00">50.000 unidades</option>
                         <option value="5" data-qty-text="100.000" data-price="796.00">100.000 unidades</option>
+                        <option value="custom">Valor Personalizado</option>
                     </select>
+                </div>
+                <div class="custom-input-wrapper">
+                    <input type="number" class="custom-number-input" min="100000" step="1000" placeholder="Ex: 150000">
                 </div>
                 <div class="card-price-display">
                     <span class="price-label">Preço:</span>
@@ -897,7 +972,11 @@
                         <option value="3" data-qty-text="20.000" data-price="560.00">20.000 unidades</option>
                         <option value="4" data-qty-text="50.000" data-price="1400.00">50.000 unidades</option>
                         <option value="5" data-qty-text="100.000" data-price="2800.00">100.000 unidades</option>
+                        <option value="custom">Valor Personalizado</option>
                     </select>
+                </div>
+                <div class="custom-input-wrapper">
+                    <input type="number" class="custom-number-input" min="100000" step="1000" placeholder="Ex: 150000">
                 </div>
                 <div class="card-price-display">
                     <span class="price-label">Preço:</span>
@@ -970,6 +1049,11 @@
             </a>
         </div>
     </section>
+
+    <!-- Botão Flutuante WhatsApp -->
+    <a href="https://wa.me/5511977418328?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20algumas%20d%C3%BAvidas." class="floating-wpp" aria-label="Falar no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -1049,10 +1133,29 @@
                 var cardId = card.getAttribute('data-card-id');
                 var select = card.querySelector('.price-select');
                 var option = select.options[select.selectedIndex];
-                var qtyText = option.getAttribute('data-qty-text');
-                var price = option.getAttribute('data-price');
+                var inputWrapper = card.querySelector('.custom-input-wrapper');
+                var numInput = card.querySelector('.custom-number-input');
                 var btn = card.querySelector('.btn-buy');
                 var priceDisplay = card.querySelector('.price-value');
+                var qtyText, price;
+
+                if (option.value === 'custom') {
+                    inputWrapper.classList.add('show');
+                    var customVal = parseInt(numInput.value) || 100000;
+                    if (customVal < 100000) customVal = 100000;
+                    
+                    var multiplier = 0;
+                    if (cardId === 'card1') multiplier = 0.00236;
+                    if (cardId === 'card2') multiplier = 0.00796;
+                    if (cardId === 'card3') multiplier = 0.028;
+                    
+                    price = (customVal * multiplier).toFixed(2);
+                    qtyText = customVal.toLocaleString('pt-BR') + ' (Personalizado)';
+                } else {
+                    inputWrapper.classList.remove('show');
+                    qtyText = option.getAttribute('data-qty-text');
+                    price = option.getAttribute('data-price');
+                }
 
                 priceDisplay.textContent = formatPrice(price);
 
@@ -1098,6 +1201,15 @@
 
             document.querySelectorAll('.price-select').forEach(function (select) {
                 select.addEventListener('change', function () {
+                    var card = this.closest('.pricing-card');
+                    if (card && !card.classList.contains('hidden')) {
+                        updateCard(card);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.custom-number-input').forEach(function (input) {
+                input.addEventListener('input', function () {
                     var card = this.closest('.pricing-card');
                     if (card && !card.classList.contains('hidden')) {
                         updateCard(card);
